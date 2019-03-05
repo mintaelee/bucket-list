@@ -5,35 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Bucket List</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
     <script src="main.js"></script>
 </head>
 <body>
-    <div>
-        <h1 id="heading">The Bucket List</h1>
-    </div>
-    <ul id="items">
-    </ul>
-    <div>
-        <h3 id="newest-item"></h3>
-    </div>
-    <div>
-        <h3 id="next-item"></h3>
-    </div>
-    <div>
-        <h3 id="number-of-items"></h3>
-    </div>
-    <div>
-        <h3 id="completed-item"></h3>
-    </div>
-    <form>
-        <input type="text" id="new-item">
-        <button id="submit">Add An Item</button>
-        <button id="remove">Remove An Item</button>
-        <button id="toggle">Toggle Queue/Stack</button>
-    </form>
-    <div>
-        <h4 id="currentToggle"></h4>
+    <div id="container">
+        <div>
+            <h1 id="heading" class="col-sm-12 col-xs-12">The Bucket List</h1>
+        </div>
+        <div>
+            </ul>
+            <ul id="items" class="col-sm-12 col-xs-12">
+        </div>
+        <div>
+            <h3 id="newest-item" class="col-sm-12 col-xs-12"></h3>
+        </div>
+        <div>
+            <h3 id="next-item" class="col-sm-12 col-xs-12"></h3>
+        </div>
+        <div>
+            <h3 id="number-of-items" class="col-sm-12 col-xs-12"></h3>
+        </div>
+        <div>
+            <h3 id="completed-item" class="col-sm-12 col-xs-12"></h3>
+        </div>
+        <form>
+            <input type="text" id="new-item" class="col-sm-12 col-xs-12">
+            <button id="submit" class="col-sm-4 col-xs-12">Add An Item</button>
+            <button id="remove" class="col-sm-4 col-xs-12">Remove An Item</button>
+            <button id="toggle" class="col-sm-4 col-xs-12">Toggle Queue/Stack</button>
+        </form>
+        <div>
+            <h4 id="currentToggle"></h4>
+        </div>
     </div>
 </body>
 </html>
