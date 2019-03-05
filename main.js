@@ -1,5 +1,5 @@
 // Global variables ftw
-
+let bucket = [];
 
 let isStack = true;
 
@@ -25,6 +25,7 @@ function addNewItem(event) {
     
     // Get the value from the input field.
     const newItem = document.querySelector('#new-item').value;
+    
 
     // Set the input field back to blank.
     resetInput();
@@ -33,16 +34,30 @@ function addNewItem(event) {
     displayItem(newItem);
 
     // Now comes your part: add the item to the list.
+    bucket.push(newItem);
 
+    //Display List Info
+    displayList();
+}
 
+function displayList(){
     // Display it in next-item if it's the first item:
-    if(false) { // definitely change that condition!
-        document.querySelector('#next-item').innerText = ''; // Replace that empty string with the actual item!
-    } 
+    // if(bucket.length === 1) { // definitely change that condition!
+    //     document.querySelector('#next-item').innerText = newItem; // Replace that empty string with the actual item!
+    // } else {
+    //     
+    if (isStack) {
+        document.querySelector('#currentToggle').innerText = 'Stack';
+        document.querySelector('#newest-item').innerText = 'Next item to be removed: ' + bucket[bucket.length-1]; // Replace that empty string with the actual item!
+    } else {
+        document.querySelector('#currentToggle').innerText = 'Queue';
+        document.querySelector('#newest-item').innerText = 'Next item to be removed: ' + bucket[0]; // Replace that empty string with the actual item!
 
-    document.querySelector('#newest-item').innerText = '' // Replace that empty string with the actual item!
+    }
+    document.querySelector('#next-item').innerText = 'First item on the list: ' + bucket[0];
+    
+    document.querySelector('#number-of-items').innerText = 'Number of items on the list: ' + bucket.length; // Replace that with the number of items!
 
-    document.querySelector('#number-of-items').innerText = 0 // Replace that with the number of items!
 }
 
 function removeItem(event) {
@@ -52,14 +67,13 @@ function removeItem(event) {
     if(isStack) {
         removeLastFromPage();
         // Your code to remove it from the array  goes here!
-
-
+        bucket.pop();
     } else {
         removeFirstFromPage();
         // Your code to remove it from the array goes here!
-
-
+        bucket.shift();
     }
+    displayList();
 }
 
 function toggleQueueAndStack(event) {
@@ -68,6 +82,12 @@ function toggleQueueAndStack(event) {
 
     // How can we toggle whether it's a stack or a queue?
     // Your code below!
+    if (isStack) {
+        isStack = false;
+    } else {
+        isStack = true;
+    }
+    displayList();
 }
 
 /*
