@@ -1,5 +1,5 @@
 // Global variables ftw
-let bucket = [];
+const bucket = [];
 
 let isStack = true;
 
@@ -46,32 +46,37 @@ function displayList(){
     //     document.querySelector('#next-item').innerText = newItem; // Replace that empty string with the actual item!
     // } else {
     //     
-    if (isStack) {
-        document.querySelector('#currentToggle').innerText = 'Stack';
-        document.querySelector('#newest-item').innerText = 'Next item to be removed: ' + bucket[bucket.length-1]; // Replace that empty string with the actual item!
+    if (bucket.length === 0 ){
+        document.querySelector('#newest-item').innerText = 'You have completed your bucket list!'; // Replace that empty string with the actual item!
+        document.querySelector('#next-item').innerText = '';
+        document.querySelector('#number-of-items').innerText = '';
     } else {
-        document.querySelector('#currentToggle').innerText = 'Queue';
-        document.querySelector('#newest-item').innerText = 'Next item to be removed: ' + bucket[0]; // Replace that empty string with the actual item!
+         if (isStack) {
+            document.querySelector('#currentToggle').innerText = 'Stack';
+            document.querySelector('#newest-item').innerText = 'Next item to be completed: ' + bucket[bucket.length-1]; // Replace that empty string with the actual item!
+        } else {
+            document.querySelector('#currentToggle').innerText = 'Queue';
+            document.querySelector('#newest-item').innerText = 'Next item to be completed: ' + bucket[0]; // Replace that empty string with the actual item!
 
-    }
-    document.querySelector('#next-item').innerText = 'First item on the list: ' + bucket[0];
+        }
+        document.querySelector('#next-item').innerText = 'First item on the list: ' + bucket[0];
     
-    document.querySelector('#number-of-items').innerText = 'Number of items on the list: ' + bucket.length; // Replace that with the number of items!
-
+        document.querySelector('#number-of-items').innerText = 'Number of items on the list: ' + bucket.length; // Replace that with the number of items!
+    }
 }
 
 function removeItem(event) {
     // Prevent page reload.
-    event.preventDefault()
+    event.preventDefault();
 
     if(isStack) {
         removeLastFromPage();
         // Your code to remove it from the array  goes here!
-        bucket.pop();
+        displayCompleted(bucket.pop());
     } else {
         removeFirstFromPage();
         // Your code to remove it from the array goes here!
-        bucket.shift();
+        displayCompleted(bucket.shift());
     }
     displayList();
 }
@@ -82,11 +87,13 @@ function toggleQueueAndStack(event) {
 
     // How can we toggle whether it's a stack or a queue?
     // Your code below!
-    if (isStack) {
-        isStack = false;
-    } else {
-        isStack = true;
-    }
+    // if (isStack) {
+    //     isStack = false;
+    // } else {
+    //     isStack = true;
+    // }
+
+    isStack ? isStack = false : isStack = true;
     displayList();
 }
 
@@ -98,13 +105,15 @@ Feel free to check it out though.
 */
 
 function removeLastFromPage() {
-    const items = document.querySelectorAll('li');
+    const container = document.querySelector('#items');
+    const items = container.querySelectorAll('li');
     const lastItem = items[items.length - 1];
     lastItem.parentNode.removeChild(lastItem);
 }
 
 function removeFirstFromPage() {
-    const items = document.querySelectorAll('li');
+    const container = document.querySelector('#items');
+    const items = container.querySelectorAll('li');
     const firstItem = items[0];
     firstItem.parentNode.removeChild(firstItem);
 }
@@ -119,4 +128,10 @@ function displayItem(itemText) {
     const newItem = document.createElement('li');
     newItem.innerText = itemText;
     document.querySelector('#items').appendChild(newItem);
+}
+
+function displayCompleted(completedItem) {
+    const newCompleted = document.createElement('li');
+    newCompleted.innerText = completedItem;
+    document.querySelector('#completed-item').appendChild(newCompleted);
 }
